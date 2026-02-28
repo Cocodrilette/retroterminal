@@ -65,6 +65,13 @@
     color: var(--terminal-bg);
   }
 
+  hr {
+    border: none;
+    border-top: 1px dashed var(--terminal-green);
+    margin: 2rem 0;
+    opacity: 0.5;
+  }
+
   :focus {
     outline: 2px solid var(--terminal-green);
     outline-offset: 2px;
