@@ -1,0 +1,74 @@
+@import '@fontsource-variable/geist-mono/index.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --terminal-green: #00ff41;
+    --terminal-dark-green: #003b00;
+    --terminal-bg: #0d0208;
+  }
+
+  html {
+    font-family: 'Geist Mono Variable', monospace;
+    background-color: var(--terminal-bg);
+    color: var(--terminal-green);
+    scrollbar-width: thin;
+    scrollbar-color: var(--terminal-green) var(--terminal-bg);
+  }
+
+  body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.25) 50%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.06),
+        rgba(0, 255, 0, 0.02),
+        rgba(0, 0, 255, 0.06)
+      );
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+
+  pre {
+    border: 1px solid var(--terminal-green);
+    background-color: rgba(0, 255, 65, 0.05);
+    padding: 1rem;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--terminal-green);
+    padding-left: 1rem;
+    font-style: italic;
+    background-color: rgba(0, 255, 65, 0.02);
+  }
+
+  a {
+    color: var(--terminal-green);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  a:hover {
+    background-color: var(--terminal-green);
+    color: var(--terminal-bg);
+  }
+}
+
+@layer utilities {
+  .terminal-box {
+    border: 1px solid var(--terminal-green);
+    background-color: var(--terminal-bg);
+  }
+}
