@@ -18,7 +18,7 @@ export default function Navigation() {
           <Link
             key={item.path}
             to={item.path}
-            className={`px-3 py-1 transition-all duration-150 group flex items-center gap-2 ${
+            className={`px-3 py-1 transition-all duration-150 group flex items-center gap-2 focus:outline-none focus:bg-green-400 focus:text-black ${
               isActive
                 ? 'bg-green-700 text-black font-bold border-l-4 border-white'
                 : 'hover:bg-green-900 hover:pl-5'
