@@ -7,9 +7,10 @@ import { MDXProvider } from '@mdx-js/react'
 import routes from '~react-pages'
 
 import AppLayout from './layout/app.layout'
+import CodeBlock from './components/code-block'
 
 const components = {
-  // Add custom components here if needed
+  pre: (props: any) => <CodeBlock {...props} />
 }
 
 function App() {
