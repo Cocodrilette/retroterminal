@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import KeyboardShortcut from './keyboard-shortcut'
 
 interface NavNode {
   name: string
@@ -11,6 +12,7 @@ interface NavNode {
 
 export default function Navigation() {
   const location = useLocation()
+  const navigate = useNavigate()
   
   // 1. Scan all pages
   const modules = import.meta.glob('../pages/**/*.{md,mdx,tsx,jsx}', { eager: true })
@@ -119,26 +121,30 @@ export default function Navigation() {
       
       {/* UP DIRECTORY */}
       {parentPath !== null && (
-        <button
-          onClick={() => setCurrentBrowsingPath(parentPath)}
-          className="px-2 py-0.5 text-left transition-all flex items-center gap-2 hover:bg-green-900/30 text-green-700"
-        >
-          <span className="text-[10px] opacity-40">[D]</span>
-          .. (UP_DIR)
-        </button>
+        <KeyboardShortcut keys={['u']} onAction={() => setCurrentBrowsingPath(parentPath)} hintPosition="right">
+          <button
+            onClick={() => setCurrentBrowsingPath(parentPath)}
+            className="px-2 py-0.5 text-left transition-all flex items-center gap-2 hover:bg-green-900/30 text-green-700 w-full"
+          >
+            <span className="text-[10px] opacity-40">[D]</span>
+            .. (UP_DIR)
+          </button>
+        </KeyboardShortcut>
       )}
 
       {/* DASHBOARD if at root */}
       {currentBrowsingPath === '/' && (
-        <Link
-          to="/"
-          className={`px-2 py-0.5 transition-all flex items-center gap-2 ${
-            location.pathname === '/' ? 'bg-[var(--terminal-green)] text-[var(--terminal-bg)] font-bold' : 'hover:bg-green-900/30'
-          }`}
-        >
-          <span className="text-[10px] opacity-40">[F]</span>
-          DASHBOARD.SYS
-        </Link>
+        <KeyboardShortcut keys={['h']} onAction={() => navigate('/')} hintPosition="right">
+          <Link
+            to="/"
+            className={`px-2 py-0.5 transition-all flex items-center gap-2 ${
+              location.pathname === '/' ? 'bg-[var(--terminal-green)] text-[var(--terminal-bg)] font-bold' : 'hover:bg-green-900/30'
+            }`}
+          >
+            <span className="text-[10px] opacity-40">[F]</span>
+            DASHBOARD.SYS
+          </Link>
+        </KeyboardShortcut>
       )}
 
       {/* DIRECTORY CONTENTS */}

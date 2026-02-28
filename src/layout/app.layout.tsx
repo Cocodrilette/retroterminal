@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navigation from "../components/navigation";
+import KeyboardShortcut from "../components/keyboard-shortcut";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,12 +17,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Mobile Header */}
       <header className="md:hidden flex justify-between items-center border border-green-700 p-3 z-50 bg-black">
         <h1 className="text-lg font-bold tracking-tighter">RETRO_CRM v1.0</h1>
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="border border-green-500 px-2 py-1 text-xs hover:bg-green-500 hover:text-black transition-colors"
-        >
-          {isMenuOpen ? '[ CLOSE_X ]' : '[ MENU_# ]'}
-        </button>
+        <KeyboardShortcut keys={['m']} onAction={() => setIsMenuOpen(!isMenuOpen)} hintPosition="left">
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="border border-green-500 px-2 py-1 text-xs hover:bg-green-500 hover:text-black transition-colors"
+          >
+            {isMenuOpen ? '[ CLOSE_X ]' : '[ MENU_# ]'}
+          </button>
+        </KeyboardShortcut>
       </header>
 
       {/* Sidebar - Desktop: Visible, Mobile: Toggleable Overlay */}
@@ -50,12 +53,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
         
         {/* Close button inside overlay for mobile */}
-        <button 
-          onClick={() => setIsMenuOpen(false)}
-          className="md:hidden mt-4 border border-green-500 p-3 text-xs font-bold hover:bg-green-500 hover:text-black transition-colors"
-        >
-          _EXIT_TERMINAL
-        </button>
+        <KeyboardShortcut keys={['Escape']} onAction={() => setIsMenuOpen(false)} disabled={!isMenuOpen}>
+          <button 
+            onClick={() => setIsMenuOpen(false)}
+            className="md:hidden mt-4 w-full border border-green-500 p-3 text-xs font-bold hover:bg-green-500 hover:text-black transition-colors flex justify-center items-center"
+          >
+            _EXIT_TERMINAL
+          </button>
+        </KeyboardShortcut>
       </aside>
 
       {/* Main Content */}
